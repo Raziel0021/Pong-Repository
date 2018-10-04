@@ -27,7 +27,9 @@ namespace game {
 		const int CALC_HALFSCREEN_WIDTH = screenWidth / 2;
 		static int FONT_SIZE_HELPER = 25;
 		static const float HELPER_LINE_DIVIDER = 1.7;
+		static const float MUSIC_HELPER_LINE_DIVIDER = 1.1;
 		static const int DIVIDER_MEASURE_TEXT = 2;
+		static bool mute;
 
 		static const int INIT_PLAYERS_POSITION_X = 20;
 		static const Vector2 PLAYERS_SIZE = { 10,80 };
@@ -56,6 +58,7 @@ namespace game {
 		void InitGame()
 		{
 			Menu::menu = true;
+			mute = false;
 			// Initialize player1
 			player1.position.x = INIT_PLAYERS_POSITION_X;
 			player1.position.y = CALC_HALFSCREEN_HEIGHT;
@@ -78,9 +81,18 @@ namespace game {
 		}
 		void play()
 		{
+			//-------------------------------------- Music and Sound ------------------------------------------
+			if (IsKeyPressed(KEY_M)) 
+			{
+				mute = !mute;
+			}
 			#define AUDIO
 			#ifdef AUDIO	
 				UpdateMusicStream(music);
+				if (mute) 
+				{
+					PauseMusicStream(music);
+				}
 			#endif // AUDIO
 
 			//--------------------------------------- Player 1 move -------------------------------------------
@@ -193,10 +205,13 @@ namespace game {
 					}
 				}
 #ifdef AUDIO	
-				if (GetRandomValue(0, 1) != 0)
-					PlaySound(ping);
-				else
-					PlaySound(pong);
+				if (!mute)
+				{
+					if (GetRandomValue(0, 1) != 0)
+						PlaySound(ping);
+					else
+						PlaySound(pong);
+				}
 #endif // AUDIO
 			}
 			// Collision logic: ball vs player2
@@ -216,10 +231,13 @@ namespace game {
 					}
 				}
 			#ifdef AUDIO	
-				if (GetRandomValue(0, 1) != 0)
-					PlaySound(ping);
-				else
-					PlaySound(pong);
+				if (!mute) 
+				{
+					if (GetRandomValue(0, 1) != 0)
+						PlaySound(ping);
+					else
+						PlaySound(pong);
+				}
 			#endif // AUDIO
 			}
 		}
@@ -230,6 +248,7 @@ namespace game {
 			DrawRectangle(midLine.x, midLine.y, MIDLINE_SIZE.x, MIDLINE_SIZE.y, DARKGRAY);
 			if (!ball.active)
 			DrawText(FormatText("Press Space to Start"), GamePlay::CALC_HALFSCREEN_WIDTH - (MeasureText("Press Space to Start", FONT_SIZE_HELPER) / DIVIDER_MEASURE_TEXT), GamePlay::screenHeight /HELPER_LINE_DIVIDER, FONT_SIZE_HELPER, GRAY);
+			DrawText(FormatText("Press M ON/OFF Mute"), GamePlay::CALC_HALFSCREEN_WIDTH - (MeasureText("Press M ON/OFF Mute", FONT_SIZE_HELPER) / DIVIDER_MEASURE_TEXT), GamePlay::screenHeight / MUSIC_HELPER_LINE_DIVIDER, FONT_SIZE_HELPER, GRAY);
 			DrawCircleV(GamePlay::ball.position, GamePlay::ball.radius, DARKPURPLE);
 			DrawRectangle(GamePlay::player1.position.x, GamePlay::player1.position.y, GamePlay::player1.size.x, GamePlay::player1.size.y, DARKPURPLE);
 			DrawRectangle(GamePlay::player2.position.x, GamePlay::player2.position.y, GamePlay::player2.size.x, GamePlay::player2.size.y, DARKPURPLE);
