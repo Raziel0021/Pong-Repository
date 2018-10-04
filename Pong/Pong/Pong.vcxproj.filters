@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Screens">
+      <UniqueIdentifier>{8865e5a0-4399-4619-b330-581ff5500321}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{406e9a80-5dbb-4426-bc6f-3a3f2e203c11}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Screens\Menu.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Screens\GameOver.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Game\GameController.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Game\GamePlay.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Main.cpp" />
+    <ClCompile Include="..\src\Screens\Credits.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Screens\GameOver.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Screens\Menu.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Game\GameController.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Game\GamePlay.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Screens\Credits.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
