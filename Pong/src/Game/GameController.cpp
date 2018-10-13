@@ -12,6 +12,7 @@ using namespace Menu;
 using namespace Credits;
 using namespace GamePlay;
 namespace game {
+	bool exit = false;
 	namespace gameController
 	{
 		void Run()
@@ -19,7 +20,7 @@ namespace game {
 			InitializeApp();
 			GamePlay::InitGame();
 			// Main game loop
-			while (!WindowShouldClose())    // Detect window close button
+			while (!WindowShouldClose()&&!exit)    // Detect window close button
 			{
 				// Update
 				if (menu == false && gameover == false && credits == false)
@@ -83,13 +84,15 @@ namespace game {
 		void UnloadGame()
 		{
 			// De-Initialization
+			#ifdef AUDIO
 			UnloadSound(ping);
 			UnloadSound(pong);
 			UnloadMusicStream(music);
 			CloseAudioDevice();
-			
+			#endif // AUDIO
 			//--------------------------------------------------------------------------------------
-			CloseWindow();        // Close window and OpenGL context
+			exit = true;
+			//CloseWindow();        // Close window and OpenGL context
 			//--------------------------------------------------------------------------------------
 		}
 	}

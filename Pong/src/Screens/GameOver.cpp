@@ -4,6 +4,7 @@
 
 #include "Game\GamePlay.h"
 #include "Menu.h"
+#include "Game/GameController.h"
 
 using namespace game;
 namespace game {
@@ -35,7 +36,8 @@ namespace game {
 		void updateGameOver()
 		{
 			if (IsKeyPressed(KEY_TWO))
-				CloseWindow();
+				gameController::UnloadGame();
+				//CloseWindow();
 			if (IsKeyPressed(KEY_ONE))
 			{
 				Menu::menu = true;

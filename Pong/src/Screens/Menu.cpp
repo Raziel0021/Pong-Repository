@@ -4,7 +4,7 @@
 
 #include "Game\GamePlay.h"
 #include "Credits.h"
-
+#include "Game/GameController.h"
 using namespace game;
 namespace game {
 	namespace Menu
@@ -42,7 +42,8 @@ namespace game {
 				Credits::credits = true;
 			}
 			if (IsKeyPressed(KEY_ESCAPE))
-				CloseWindow();
+				gameController::UnloadGame();
+				//CloseWindow();
 		}
 	}
 }
